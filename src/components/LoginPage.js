@@ -173,15 +173,21 @@ function LoginPage() {
     <Box className="mainFont">
       <HStack>
         <Box>
-          <h3> Register User </h3>
+          <Text fontSize='3xl'> Register </Text>
           <Input
+          htmlSize={40} width='auto'
+            _hover={{ bgColor: "white" }}
+            marginTop="20px"
+            variant="filled"
             placeholder="Username..."
             onChange={(event) => {
               setUsername(event.target.value);
             }}
           />
           <Input
-            marginTop="10px"
+            htmlSize={40} width='auto'
+            _hover={{ bgColor: "white" }}
+            marginTop="40px"
             variant="filled"
             placeholder="Email..."
             onChange={(event) => {
@@ -190,6 +196,11 @@ function LoginPage() {
           />
 
           <Input
+            htmlSize={40} width='auto'
+            _hover={{ bgColor: "white" }}
+            marginTop="40px"
+            marginBottom="40px"
+            variant="filled"
             placeholder="Password..."
             type={"password"}
             onChange={(event) => {
@@ -200,8 +211,13 @@ function LoginPage() {
         </Box>
 
         <Box>
-          <h3> Login User </h3>
+        <Text 
+        fontSize='3xl'> Login </Text>
           <Input
+           htmlSize={40} width='auto'
+           _hover={{ bgColor: "white" }}
+           marginTop="20px"
+           variant="filled"
             placeholder="Email..."
             onChange={(event) => {
               setLoginEmail(event.target.value);
@@ -209,6 +225,10 @@ function LoginPage() {
           />
 
           <Input
+            htmlSize={40} width='auto'
+            _hover={{ bgColor: "white" }}
+            marginTop="40px"
+            variant="filled"
             placeholder="Password..."
             type="password"
             onChange={(event) => {
