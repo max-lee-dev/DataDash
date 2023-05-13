@@ -58,7 +58,9 @@ const Dashboard = () => {
       )}
       {!loading && (
         <Box>
-          <Text fontSize="24px">Welcome {user?.displayName} </Text>
+          <Text paddingBottom="20px" fontSize="24px">
+            Welcome, {user?.displayName}{" "}
+          </Text>
 
           <Box className="floating">
             <AddTrackerButton
@@ -71,7 +73,6 @@ const Dashboard = () => {
           <Text>
             {myTrackers.length > 0 && (
               <Box>
-                <Text fontSize="18px">My Trackers</Text>
                 <VStack>
                   {myTrackers.map((tracker) => (
                     <Tracker key={tracker.trackerName} tracker={tracker} />

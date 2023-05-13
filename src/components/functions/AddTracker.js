@@ -7,9 +7,9 @@ export default function AddTracker(
   isNumber,
   isBoolean,
   isTime,
-  isNotes
+  isNotes,
+  trackerDescription
 ) {
-  console.log(userUID, trackerName, isNumber, isBoolean, isTime, isNotes);
   add();
   function add() {
     console.log(trackerName);
@@ -28,6 +28,7 @@ export default function AddTracker(
     try {
       setDoc(doc(db, "trackers", trackerName + userUID), {
         trackerName: trackerName,
+        trackerDescription: trackerDescription,
         isNumber: isNumber,
         isBoolean: isBoolean,
         isTime: isTime,
@@ -35,7 +36,7 @@ export default function AddTracker(
         userUID: userUID,
         entries: [],
       }).then(() => {
-        console.log("Document successfully written!");
+        window.location.reload();
       });
     } catch (e) {
       alert("Tracker name already exists");

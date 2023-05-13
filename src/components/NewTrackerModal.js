@@ -34,6 +34,7 @@ export default function NewTrackerModal({
     });
   }, []);
   const [trackerName, setTrackerName] = useState("");
+  const [description, setDescription] = useState("");
   const [isNumber, setIsNumber] = useState(false);
   const [isBoolean, setIsBoolean] = useState(false);
   const [isTime, setIsTime] = useState(false);
@@ -70,6 +71,16 @@ export default function NewTrackerModal({
                 borderColor="transparent"
                 type="text"
               />
+              <Box paddingBottom="10px">
+                <Input
+                  type="text"
+                  fontSize="16px"
+                  height="40px"
+                  borderColor="transparent"
+                  placeholder="tracking if i slept before 12 AM"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </Box>
               <ModalCloseButton />
             </Box>
           </ModalHeader>
@@ -139,7 +150,8 @@ export default function NewTrackerModal({
                   isNumber,
                   isBoolean,
                   isTime,
-                  isNotes
+                  isNotes,
+                  description
                 )
               }
             >
