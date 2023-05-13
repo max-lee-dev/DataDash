@@ -1,5 +1,5 @@
 import { db } from "../../components/firebase.js";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, addDoc, collection } from "firebase/firestore";
 
 export default function AddTracker(
   userUID,
@@ -11,7 +11,7 @@ export default function AddTracker(
   trackerDescription
 ) {
   add();
-  function add() {
+  async function add() {
     console.log(trackerName);
     if (trackerName === "") {
       alert("Please enter a tracker name");
@@ -26,7 +26,7 @@ export default function AddTracker(
       return;
     }
     try {
-      setDoc(doc(db, "trackers", trackerName + userUID), {
+      const newTracker = await addDoc(collection(db, "trackers"), {
         trackerName: trackerName,
         trackerDescription: trackerDescription,
         isNumber: isNumber,
@@ -34,12 +34,11 @@ export default function AddTracker(
         isTime: isTime,
         isNotes: isNotes,
         userUID: userUID,
-        entries: [],
       }).then(() => {
         window.location.reload();
       });
     } catch (e) {
-      alert("Tracker name already exists");
+      alert(e.message);
       return;
     }
     console.log("added tracker");

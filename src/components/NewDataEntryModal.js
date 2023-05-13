@@ -16,11 +16,12 @@ import {
   HStack,
   Checkbox,
 } from "@chakra-ui/react";
+import AddEntry from "./functions/AddEntry";
 
 export default function NewDataEntryModal({
   isAddEntryOpen,
   onAddEntryClose,
-  Entry,
+  tracker,
 }) {
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -32,22 +33,18 @@ export default function NewDataEntryModal({
       }
     });
   }, []);
-  const [EntryName, setEntryName] = useState("");
-  const [description, setDescription] = useState("");
-  const [isNumber, setIsNumber] = useState(false);
-  const [isBoolean, setIsBoolean] = useState(false);
-  const [isTime, setIsTime] = useState(false);
-  const [isNotes, setIsNotes] = useState(false);
+  const [numberValue, setNumberValue] = useState(0);
+  const [booleanValue, setBooleanValue] = useState(false);
+  const [timeValue, setTimeValue] = useState("");
+  const [notesValue, setNotesValue] = useState("");
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  console.log(EntryName, isNumber, isBoolean, isTime, isNotes);
   useEffect(() => {
-    setEntryName("");
-    setIsNumber(false);
-    setIsBoolean(false);
-    setIsTime(false);
-    setIsNotes(false);
+    if (!tracker.isNumber) setNumberValue(null);
+    if (!tracker.isBoolean) setBooleanValue(null);
+    if (!tracker.isTime) setTimeValue(null);
+    if (!tracker.isNotes) setNotesValue(null);
   }, []);
   return (
     <>
@@ -62,23 +59,7 @@ export default function NewDataEntryModal({
         <ModalContent bgColor={"#FAFAF5"} width="500px">
           <ModalHeader>
             <Box className="mainFont">
-              <Input
-                fontSize="24px"
-                placeholder="My sleeping log"
-                onChange={(e) => setEntryName(e.target.value)}
-                width="auto"
-                type="text"
-              />
-              <Box paddingBottom="10px">
-                <Input
-                  type="text"
-                  fontSize="16px"
-                  height="40px"
-                  borderColor="transparent"
-                  placeholder="tracking if i slept before 12 AM"
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </Box>
+              <Text>{tracker.trackerName}</Text>
               <ModalCloseButton />
             </Box>
           </ModalHeader>
@@ -87,13 +68,56 @@ export default function NewDataEntryModal({
             <Box paddingLeft="15px" className="mainFont">
               <form onSubmit={(e) => e.preventDefault()}>
                 <VStack alignItems={"flex-start"}>
-                  <Box paddingLeft="5px">hi</Box>
+                  {tracker.isNumber && (
+                    <Input
+                      placeholder="number"
+                      value={numberValue}
+                      onChange={(e) => setNumberValue(e.target.value)}
+                      width="100%"
+                      maxWidth="100px"
+                      height="30px"
+                      fontSize="15px"
+                      marginBottom="10px"
+                      ref={initialRef}
+                    />
+                  )}
+                  {tracker.isBoolean && (
+                    <HStack>
+                      <Checkbox
+                        onChange={(e) => setBooleanValue(e.target.checked)}
+                        width="100%"
+                        maxWidth="500px"
+                        height="50px"
+                        fontSize="24px"
+                        marginBottom="10px"
+                        colorScheme="green"
+                        ref={initialRef}
+                      >
+                        Yes
+                      </Checkbox>
+                    </HStack>
+                  )}
                 </VStack>
               </form>
             </Box>
           </ModalBody>
 
-          <ModalFooter> </ModalFooter>
+          <ModalFooter>
+            <Button
+              colorScheme="blue"
+              onClick={() =>
+                AddEntry(
+                  tracker.id,
+                  numberValue,
+                  booleanValue,
+                  timeValue,
+                  notesValue
+                )
+              }
+            >
+              Add new
+            </Button>{" "}
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
