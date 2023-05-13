@@ -171,8 +171,9 @@ function LoginPage() {
 
   return (
     <Box className="mainFont">
-      <HStack>
+      
         <Box>
+        <VStack>
           <Text fontSize='3xl'> Register </Text>
           <Input
           htmlSize={40} width='auto'
@@ -208,8 +209,10 @@ function LoginPage() {
             }}
           />
           <Button onClick={register}>Register</Button>
+          </VStack>
         </Box>
-
+      
+      <HStack>
         <Box>
         <Text 
         fontSize='3xl'> Login </Text>
