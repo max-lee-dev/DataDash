@@ -12,6 +12,7 @@ import {
   ModalFooter,
   Input,
   VStack,
+  HStack,
   Checkbox,
 } from "@chakra-ui/react";
 
@@ -35,48 +36,67 @@ export default function NewTrackerModal({
         size="6xl"
       >
         <ModalOverlay />
-        <ModalContent bgColor={"#D4D4D4"} minHeight={"500px"} width="500px">
+        <ModalContent bgColor={"#D4D4D4"} width="500px">
           <ModalHeader>
             <Box className="searchModal">
-              <Text color="#424DB6" fontSize="32px">
-                Add a new tracker
-              </Text>
+              <Input
+                fontSize="24px"
+                placeholder="My sleeping log"
+                onChange={(e) => setTrackerName(e.target.value)}
+                width="90%"
+                borderColor="transparent"
+                type="text"
+              />
               <ModalCloseButton />
             </Box>
           </ModalHeader>
 
           <ModalBody>
-            <Box
-              paddingRight="30px"
-              height="520px"
-              overflow="auto"
-              className="scroll"
-            >
+            <Box paddingLeft="15px">
               <form onSubmit={(e) => e.preventDefault()}>
                 <VStack alignItems={"flex-start"}>
-                  <Input
-                    fontSize="24px"
-                    placeholder="My sleeping log"
-                    onChange={(e) => setTrackerName(e.target.value)}
-                    width="90%"
-                    type="text"
-                  />
-
                   <Box paddingLeft="5px">
                     <VStack alignItems={"flex-start"}>
                       <Text>select desired value(s)</Text>
-
-                      <Checkbox
-                        fontSize="24px"
-                        size={"lg"}
-                        colorScheme="green"
-                        onChange={(e) => setIsNumber(e.target.checked)}
-                      />
-                      <Box fontSize="5px">
-                        <Checkbox
-                          colorScheme="green"
-                          onChange={(e) => setIsBoolean(e.target.checked)}
-                        />
+                      <Box>
+                        <HStack>
+                          <Checkbox
+                            size={"lg"}
+                            colorScheme="green"
+                            onChange={(e) => setIsNumber(e.target.checked)}
+                          />{" "}
+                          <Text>Number</Text>
+                        </HStack>
+                      </Box>
+                      <Box>
+                        <HStack>
+                          <Checkbox
+                            size={"lg"}
+                            colorScheme="green"
+                            onChange={(e) => setIsBoolean(e.target.checked)}
+                          />
+                          <Text>True/False</Text>
+                        </HStack>
+                      </Box>
+                      <Box>
+                        <HStack>
+                          <Checkbox
+                            size={"lg"}
+                            colorScheme="green"
+                            onChange={(e) => setIsBoolean(e.target.checked)}
+                          />
+                          <Text>Time</Text>
+                        </HStack>
+                      </Box>
+                      <Box>
+                        <HStack>
+                          <Checkbox
+                            size={"lg"}
+                            colorScheme="green"
+                            onChange={(e) => setIsBoolean(e.target.checked)}
+                          />
+                          <Text>Notes</Text>
+                        </HStack>
                       </Box>
                     </VStack>
                   </Box>
