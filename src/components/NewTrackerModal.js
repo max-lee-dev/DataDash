@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { auth } from "./firebase";
 import {
   Box,
   Text,
@@ -16,16 +17,38 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 
+import AddTracker from "./functions/AddTracker";
+
 export default function NewTrackerModal({
   isAddTrackerOpen,
   onAddTrackerClose,
 }) {
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
   const [trackerName, setTrackerName] = useState("");
   const [isNumber, setIsNumber] = useState(false);
   const [isBoolean, setIsBoolean] = useState(false);
+  const [isTime, setIsTime] = useState(false);
+  const [isNotes, setIsNotes] = useState(false);
+
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  console.log(isNumber);
+  console.log(trackerName, isNumber, isBoolean, isTime, isNotes);
+  useEffect(() => {
+    setTrackerName("");
+    setIsNumber(false);
+    setIsBoolean(false);
+    setIsTime(false);
+    setIsNotes(false);
+  }, []);
   return (
     <>
       <Modal
@@ -38,7 +61,7 @@ export default function NewTrackerModal({
         <ModalOverlay />
         <ModalContent bgColor={"#D4D4D4"} width="500px">
           <ModalHeader>
-            <Box className="searchModal">
+            <Box className="mainFont">
               <Input
                 fontSize="24px"
                 placeholder="My sleeping log"
@@ -52,7 +75,7 @@ export default function NewTrackerModal({
           </ModalHeader>
 
           <ModalBody>
-            <Box paddingLeft="15px">
+            <Box paddingLeft="15px" className="mainFont">
               <form onSubmit={(e) => e.preventDefault()}>
                 <VStack alignItems={"flex-start"}>
                   <Box paddingLeft="5px">
@@ -83,7 +106,7 @@ export default function NewTrackerModal({
                           <Checkbox
                             size={"lg"}
                             colorScheme="green"
-                            onChange={(e) => setIsBoolean(e.target.checked)}
+                            onChange={(e) => setIsTime(e.target.checked)}
                           />
                           <Text>Time</Text>
                         </HStack>
@@ -93,7 +116,7 @@ export default function NewTrackerModal({
                           <Checkbox
                             size={"lg"}
                             colorScheme="green"
-                            onChange={(e) => setIsBoolean(e.target.checked)}
+                            onChange={(e) => setIsNotes(e.target.checked)}
                           />
                           <Text>Notes</Text>
                         </HStack>
@@ -107,8 +130,20 @@ export default function NewTrackerModal({
 
           <ModalFooter>
             {" "}
-            <Button colorScheme="blue" onClick={onAddTrackerClose}>
-              Add
+            <Button
+              colorScheme="blue"
+              onClick={() =>
+                AddTracker(
+                  user?.uid,
+                  trackerName,
+                  isNumber,
+                  isBoolean,
+                  isTime,
+                  isNotes
+                )
+              }
+            >
+              Add new
             </Button>
           </ModalFooter>
         </ModalContent>
