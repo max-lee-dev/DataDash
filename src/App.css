@@ -7,6 +7,7 @@ body {
 }
 .container {
   margin: 1rem;
+  background-color: #D4D4D4;
 }
 .nav {
   background-color: #333;
@@ -20,6 +21,15 @@ body {
 .site-title{
   font-size: 2rem;
 }
+
+:root {
+  background-color: #D4D4D4;
+}
+
+.floating {
+  position: 'absolute'; width: 50; height: 50; align-items: 'center'; justify-content: 'center'; right: 30; bottom: 30; 
+}
+
 .nav ul{
   padding: 0; 
   margin: 0;

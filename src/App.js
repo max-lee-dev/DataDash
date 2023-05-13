@@ -20,10 +20,13 @@ function App() {
   }
   return (
     <ChakraProvider>
-      <NavBar />
-      <div className="container">
-        {Component}
-      </div>
+      <Box bgColor='#D4D4D4'>
+        <NavBar />
+      
+        <Box className="container">
+          {Component}
+        </Box>
+      </Box>
     </ChakraProvider>
 
   );
