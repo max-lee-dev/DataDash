@@ -22,8 +22,9 @@ function App() {
     <ChakraProvider>
       <Box bgColor='#D4D4D4'>
         <NavBar />
+        
       
-        <Box className="container">
+        <Box className="container" minH='95vh'>
           {Component}
         </Box>
       </Box>

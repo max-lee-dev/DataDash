@@ -1,4 +1,5 @@
 import React from 'react';
+import AddTrackerButton from './AddTrackerButton';
 import { Center, Box, HStack, VStack, Text, Button} from "@chakra-ui/react"
 const Dashboard = () => {
     return (
@@ -6,7 +7,7 @@ const Dashboard = () => {
         <Text fontSize='24px'>Dashboard</Text>
         
         <Box className='floating'>
-            <Button>hi</Button>
+            <AddTrackerButton/>
         </Box>
     </Box>
 
