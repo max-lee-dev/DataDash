@@ -12,16 +12,22 @@ function App() {
     case "/":
       Component = <Dashboard />
       break
+      
       case "/login":
         Component = <LoginPage />
         break
+      default:
   }
   return (
     <ChakraProvider>
-      <NavBar />
-      <div className="container">
-        {Component}
-      </div>
+      <Box bgColor='#D4D4D4'>
+        <NavBar />
+        
+      
+        <Box className="container" minH='95vh'>
+          {Component}
+        </Box>
+      </Box>
     </ChakraProvider>
 
   );
