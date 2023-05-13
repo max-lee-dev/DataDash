@@ -60,15 +60,14 @@ export default function NewTrackerModal({
         size="6xl"
       >
         <ModalOverlay />
-        <ModalContent bgColor={"#D4D4D4"} width="500px">
+        <ModalContent bgColor={"#FAFAF5"} width="500px">
           <ModalHeader>
             <Box className="mainFont">
               <Input
                 fontSize="24px"
-                placeholder="My sleeping log"
+                placeholder="Add a title..."
                 onChange={(e) => setTrackerName(e.target.value)}
-                width="90%"
-                borderColor="transparent"
+                width="fit-content"
                 type="text"
               />
               <Box paddingBottom="10px">
@@ -76,8 +75,7 @@ export default function NewTrackerModal({
                   type="text"
                   fontSize="16px"
                   height="40px"
-                  borderColor="transparent"
-                  placeholder="tracking if i slept before 12 AM"
+                  placeholder="Add a description... (optional)"
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </Box>
