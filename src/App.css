@@ -16,6 +16,10 @@ html::-webkit-scrollbar-thumb:hover {
   background-color: #555
 }
 
+.mainFont {
+  font-family: 'Lexend Deca', sans-serif;
+}
+
 
 body {
   margin: 0;
