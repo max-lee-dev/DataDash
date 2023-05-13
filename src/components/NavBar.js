@@ -9,15 +9,23 @@ export default function NavBar() {
       </a>
       <ul>
         <Box
-          bgColor="#211F6B"
+          borderRadius="md"
+          bgColor="#424DB6;"
           color="white"
-          height="50%"
-          borderRadius="5px"
+          px={8}
+          h={10}
           alignSelf="center"
         >
           <a href="/dashboard">About </a>
         </Box>
-        <Box bgColor="blue">
+        <Box
+          borderRadius="md"
+          bgColor="#424DB6;"
+          color="white"
+          px={8}
+          h={10}
+          alignSelf="center"
+        >
           <a href="/login">Log in</a>
         </Box>
       </ul>

@@ -34,12 +34,13 @@ export default function AddTracker(
         isNotes: isNotes,
         userUID: userUID,
         entries: [],
+      }).then(() => {
+        console.log("Document successfully written!");
       });
     } catch (e) {
       alert("Tracker name already exists");
       return;
     }
-    window.location.reload();
     console.log("added tracker");
   }
 }
