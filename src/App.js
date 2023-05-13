@@ -7,24 +7,24 @@ import { Box } from "@chakra-ui/react"
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 function App() {
+  let Component
+  switch (window.location.pathname){
+    case "/":
+      Component = App
+      break
+      case "/dashboard":
+        Component = <Dashboard />
+        break
+      case "/login":
+        Component = <LoginPage />
+        break
+  }
   return (
     <ChakraProvider>
       <NavBar />
-        <Box minHeight={'80vh'}>
-            <Router>
-            <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/login" element={< LoginPage/>} />
-
-            </Routes>
-            </Router>
-
-
-        </Box>
-
-
-
-
+      <div className="container">
+        {Component}
+      </div>
     </ChakraProvider>
 
   );

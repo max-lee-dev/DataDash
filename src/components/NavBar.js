@@ -1,13 +1,21 @@
 export default function NavBar(){
+    const path = window.location.pathname
     return <nav className="nav">
-        <a href="/" className="site-title">Site Name</a>
+        <a href="/" className="site-title">
+            DataDash
+        </a>
         <ul>
-           <li className="active">
-                <a href = "/pricing">Pricing</a>
-            </li> 
-            <li>
-                <a href = "/about">About</a>
-            </li> 
+            <CustomLink href="/dashboard">Dashboard</CustomLink>
+            <CustomLink href="/login">Login</CustomLink>
         </ul>
     </nav>
+}
+
+function CustomLink({href, children, ...props}){
+    const path = window.location.pathname
+    return (
+        <li className = {path === href? "active" : ""}>
+            <a href = {href}{...props}>{children}</a>
+        </li> 
+    )
 }
