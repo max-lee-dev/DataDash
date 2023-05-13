@@ -20,13 +20,14 @@ html::-webkit-scrollbar-thumb:hover {
 body {
   margin: 0;
 }
+
 .container {
   margin: 1rem;
   background-color: #D4D4D4;
 }
 .nav {
-  background-color: #333;
-  color: white;
+  background-color: #D4D4D4;
+  color: #424DB6;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
