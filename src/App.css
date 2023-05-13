@@ -20,6 +20,11 @@ html::-webkit-scrollbar-thumb:hover {
   font-family: 'Lexend Deca', sans-serif;
 }
 
+input::placeholder {
+  color: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+}
+
 
 body {
   margin: 0;
