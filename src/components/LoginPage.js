@@ -181,6 +181,8 @@ function LoginPage() {
             }}
           />
           <Input
+            marginTop="10px"
+            variant="filled"
             placeholder="Email..."
             onChange={(event) => {
               setRegisterEmail(event.target.value);
