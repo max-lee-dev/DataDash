@@ -5,8 +5,11 @@ export default function NavBar(){
             DataDash
         </a>
         <ul>
-            <CustomLink href="/dashboard">Dashboard</CustomLink>
+            <CustomLink href="/About">About</CustomLink>
             <CustomLink href="/login">Login</CustomLink>
+            <div className="nav a:before" />
+
+
         </ul>
     </nav>
 }

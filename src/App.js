@@ -10,11 +10,8 @@ function App() {
   let Component
   switch (window.location.pathname){
     case "/":
-      Component = App
+      Component = <Dashboard />
       break
-      case "/dashboard":
-        Component = <Dashboard />
-        break
       case "/login":
         Component = <LoginPage />
         break
