@@ -104,6 +104,7 @@ export default function Tracker({ tracker }) {
             <HStack>
               {tracker.isNumber && (
                 <Box
+                  marginLeft="5px"
                   bgColor="#e6e2c1"
                   display="flex"
                   overflowWrap={"normal"}
@@ -115,6 +116,7 @@ export default function Tracker({ tracker }) {
               )}
               {tracker.isBoolean && (
                 <Box
+                  marginLeft="5px"
                   bgColor="#e6e2c1"
                   display="flex"
                   overflowWrap={"normal"}

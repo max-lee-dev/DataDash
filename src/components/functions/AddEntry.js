@@ -21,14 +21,13 @@ export default function AddEntry(
       return;
     }
     try {
-      console.log(trackerUID + " test - < ");
-
       const dataEntry = addDoc(collection(db, "dataEntries"), {
         numberValue: numberValue,
         booleanValue: booleanValue,
         timeValue: timeValue,
         notesValue: notesValue,
         parentTracker: trackerUID,
+        date: new Date(),
         when: Date.parse(new Date()),
       }).then(() => {
         window.location.reload();

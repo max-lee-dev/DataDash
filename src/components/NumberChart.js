@@ -15,10 +15,12 @@ import Chart from "chart.js/auto";
 export default function NumberChart({ uid }) {
   const [loading, setLoading] = useState(true);
   const [numberArray, setNumbersArray] = useState([]);
+  const [datesArray, setDatesArray] = useState([]);
   const [graphData, setGraphData] = useState({});
   useEffect(() => {
     setLoading(true);
-    const tempArray = [];
+    const tempDatesArray = [];
+    const map = new Map();
 
     async function findBooleanValues() {
       const q = query(
@@ -28,9 +30,16 @@ export default function NumberChart({ uid }) {
       const top = query(q, orderBy("when", "asc"));
       const recentQuerySnapshot = await getDocs(top);
       recentQuerySnapshot.forEach((doc) => {
-        tempArray.push(doc.data().numberValue);
+        const date = doc.data().date.toDate();
+        const month = date.getMonth() + 1 + "/" + date.getDate();
+        if (!map.has(month)) map.set(month, parseInt(doc.data().numberValue));
+        else {
+          map.set(month, map.get(month) + parseInt(doc.data().numberValue));
+        }
       });
+      const tempArray = Array.from(map);
       setNumbersArray(tempArray);
+      setDatesArray(tempDatesArray);
     }
     findBooleanValues();
   }, []);
@@ -39,7 +48,7 @@ export default function NumberChart({ uid }) {
   useEffect(() => {
     try {
       setGraphData({
-        labels: numberArray.map((data) => data),
+        labels: datesArray.map((data) => data),
         datasets: [
           {
             label: "WPM",
@@ -47,7 +56,7 @@ export default function NumberChart({ uid }) {
             backgroundColor: "white",
             scaleShowLabels: false,
             pointBackgroundColor: "#FFCD29",
-            pointRadius: 1,
+            pointRadius: 5,
             pointHitRadius: 100,
           },
         ],

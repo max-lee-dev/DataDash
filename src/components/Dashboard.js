@@ -34,13 +34,12 @@ const Dashboard = () => {
       setLoading(false);
     });
     async function getTrackers() {
-      console.log("FINDING TRACKERS");
       const q = query(trackersCollectionRef, where("userUID", "==", user?.uid));
       const trackersSnapshot = await getDocs(q);
       const trackersList = trackersSnapshot.docs.map((doc) => doc.data());
       setMyTrackers(trackersList);
     }
-    if (!loading) getTrackers();
+    if (!loading && user) getTrackers();
   }, [user]);
   const {
     isOpen: isAddTrackerOpen,
@@ -60,8 +59,14 @@ const Dashboard = () => {
         <Center>
           <Box width="80%">
             <Text paddingBottom="20px" fontSize="24px">
-              Welcome, {user?.displayName}{" "}
+              Welcome, {user?.displayName}
+              {user ? "" : "Guest"}
             </Text>
+            <Text paddingBottom="20px" fontSize="24px">
+              {user ? "" : "Please log in to view your trackers."}
+            </Text>
+
+            <Text paddingBottom="20px" fontSize="24px"></Text>
 
             <Box className="floating">
               <AddTrackerButton
