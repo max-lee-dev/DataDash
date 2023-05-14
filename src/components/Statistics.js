@@ -7,8 +7,29 @@ export default function Statistics({ tracker, numEntries }) {
       <Text paddingLeft="10px" fontSize="22px">
         Statistics
       </Text>
-      <Text paddingLeft="10px" fontSize="18px">
+      <Text paddingLeft="10px" fontSize="16px">
         {numEntries} entries
+      </Text>
+      <Text>
+        {tracker.isNumber ? (
+          <Box>
+            <Text paddingLeft="10px" fontSize="16px">
+              Average: {tracker.average}
+            </Text>
+            <Text paddingLeft="10px" fontSize="16px">
+              Median: {tracker.median}
+            </Text>
+          </Box>
+        ) : (
+          <Box>
+            <Text paddingLeft="10px" fontSize="16px">
+              Most common: {tracker.mostCommon}
+            </Text>
+            <Text paddingLeft="10px" fontSize="16px">
+              Least common: {tracker.leastCommon}
+            </Text>
+          </Box>
+        )}
       </Text>
     </Box>
   );
