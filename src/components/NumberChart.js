@@ -34,11 +34,12 @@ export default function NumberChart({ uid }) {
     }
     findBooleanValues();
   }, []);
-  console.log(numberArray);
+  console.log("yo: " + numberArray);
 
   useEffect(() => {
     try {
       setGraphData({
+        labels: numberArray.map((data) => data),
         datasets: [
           {
             label: "WPM",
@@ -56,6 +57,7 @@ export default function NumberChart({ uid }) {
       console.log(error.message);
     }
   }, [numberArray]);
+  console.log(graphData);
   const dataEntriesCollectionRef = collection(db, "dataEntries");
 
   if (!loading)
@@ -76,8 +78,17 @@ export default function NumberChart({ uid }) {
             },
             x: {
               ticks: {
-                display: false,
+                display: true,
               },
+            },
+          },
+          plugins: {
+            title: {
+              display: false,
+              text: "",
+            },
+            legend: {
+              display: false,
             },
           },
         }}
