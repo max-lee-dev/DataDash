@@ -14,18 +14,10 @@ import {
 
 export default function RenderNotes({ dataEntries }) {
   console.log(dataEntries);
-  const map = new Map();
+  const arr = [];
   dataEntries.forEach((value) => {
-    map.set(
-      value.date.toDate().getMonth() +
-        1 +
-        "/" +
-        value.date.toDate().getDate() +
-        " ",
-      value.notesValue
-    );
+    arr.push(value.notesValue);
   });
-  const arr = Array.from(map.values());
   return (
     <Box marginBottom="3px">
       {arr.map((entry) => (

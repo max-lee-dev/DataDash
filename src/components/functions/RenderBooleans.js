@@ -14,18 +14,10 @@ import {
 
 export default function RenderBooleans({ dataEntries }) {
   console.log(dataEntries);
-  const map = new Map();
+  const arr = [];
   dataEntries.forEach((value) => {
-    map.set(
-      value.date.toDate().getMonth() +
-        1 +
-        "/" +
-        value.date.toDate().getDate() +
-        " ",
-      value.booleanValue
-    );
+    arr.push(value.booleanValue);
   });
-  const arr = Array.from(map.values());
   return (
     <Box>
       {arr.map((entry) => (

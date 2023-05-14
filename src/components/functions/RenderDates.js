@@ -13,9 +13,9 @@ import {
 
 export default function RenderDates({ dataEntries }) {
   console.log(dataEntries);
-  const map = new Map();
+  const arr = [];
   dataEntries.forEach((value) => {
-    map.set(
+    arr.push(
       value.date.toDate().getMonth() +
         1 +
         "/" +
@@ -23,7 +23,6 @@ export default function RenderDates({ dataEntries }) {
         " "
     );
   });
-  const arr = Array.from(map.keys());
   return (
     <Box>
       {arr.map((entry) => (
