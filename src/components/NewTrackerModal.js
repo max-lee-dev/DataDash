@@ -64,18 +64,24 @@ export default function NewTrackerModal({
           <ModalHeader>
             <Box className="mainFont">
               <Input
+              marginTop = "20px"
+              marginBottom = "10px"
                 fontSize="24px"
-                placeholder="Add a title..."
+                placeholder="Tracker Name..."
+                _hover={{ bgColor: "white" }}
+                variant="filled"
                 onChange={(e) => setTrackerName(e.target.value)}
                 width="fit-content"
                 type="text"
               />
-              <Box paddingBottom="10px">
+              <Box paddingBottom="1px">
                 <Input
+                _hover={{ bgColor: "white" }}
+                variant="filled"
                   type="text"
-                  fontSize="16px"
-                  height="40px"
-                  placeholder="Add a description... (optional)"
+                  fontSize="14px"
+                  height="28px"
+                  placeholder="Description... (optional)"
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </Box>
@@ -84,12 +90,12 @@ export default function NewTrackerModal({
           </ModalHeader>
 
           <ModalBody>
-            <Box paddingLeft="15px" className="mainFont">
+            <Box paddingLeft="1px" className="mainFont">
               <form onSubmit={(e) => e.preventDefault()}>
                 <VStack alignItems={"flex-start"}>
                   <Box paddingLeft="5px">
                     <VStack alignItems={"flex-start"}>
-                      <Text>select desired value(s)</Text>
+                      <Text>select tracking type</Text>
                       <Box>
                         <HStack>
                           <Checkbox
