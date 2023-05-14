@@ -178,6 +178,7 @@ function LoginPage() {
   };
 
   return (
+
     <Box className="mainFont">
       <HStack justifyContent="space-evenly">
         <Box>
@@ -258,7 +259,7 @@ function LoginPage() {
                 borderRadius={"3px"}
                 minHeight="45px"
               >
-                <Box fontSize="24px" paddingRight="10px" paddingTop="5px">
+                <Box fontSize="24px" paddingRight="20px"paddingTop="5px">
                   <ion-icon name="logo-google"></ion-icon>
                 </Box>
                 Sign in with Google
@@ -269,7 +270,10 @@ function LoginPage() {
         </Box>
       </HStack>
       <Center>
-        Signed in as: {user?.displayName}
+        <Box bg='white'>
+          Signed in as: 
+        </Box>
+        {user?.displayName}
         <Button onClick={logout}>Logout</Button>
         {error !== "" && <Text color="red">{error} </Text>}
       </Center>
