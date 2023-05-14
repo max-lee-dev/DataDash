@@ -1,5 +1,5 @@
 import { db } from "../../components/firebase.js";
-import { setDoc, doc, addDoc, collection } from "firebase/firestore";
+import { setDoc, doc, addDoc, collection, updateDoc } from "firebase/firestore";
 
 export default function AddTracker(
   userUID,
@@ -34,6 +34,10 @@ export default function AddTracker(
         isTime: isTime,
         isNotes: isNotes,
         userUID: userUID,
+      });
+
+      await updateDoc(doc(db, "trackers", newTracker.id), {
+        trackerUID: newTracker.id,
       }).then(() => {
         window.location.reload();
       });

@@ -9,6 +9,7 @@ export default function AddEntry(
   notesValue
 ) {
   add();
+
   function add() {
     if (
       numberValue === null &&
@@ -20,17 +21,21 @@ export default function AddEntry(
       return;
     }
     try {
+      console.log(trackerUID + " test - < ");
+
       const dataEntry = addDoc(collection(db, "dataEntries"), {
         numberValue: numberValue,
         booleanValue: booleanValue,
         timeValue: timeValue,
         notesValue: notesValue,
         parentTracker: trackerUID,
+        when: Date.parse(new Date()),
       }).then(() => {
         window.location.reload();
       });
     } catch (e) {
-      alert("Tracker name already exists");
+      console.log(trackerUID + " test - < ");
+      alert(trackerUID);
       return;
     }
     console.log("added tracker");

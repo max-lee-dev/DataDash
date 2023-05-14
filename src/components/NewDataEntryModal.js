@@ -46,6 +46,8 @@ export default function NewDataEntryModal({
     if (!tracker.isTime) setTimeValue(null);
     if (!tracker.isNotes) setNotesValue(null);
   }, []);
+  console.log(tracker.uid);
+
   return (
     <>
       <Modal
@@ -97,17 +99,46 @@ export default function NewDataEntryModal({
                       </Checkbox>
                     </HStack>
                   )}
+                  {tracker.isTime && (
+                    <HStack>
+                      <Input
+                        placeholder="time"
+                        onChange={(e) => setTimeValue(e.target.value)}
+                        width="100%"
+                        maxWidth="500px"
+                        height="50px"
+                        fontSize="24px"
+                        marginBottom="10px"
+                        type="text"
+                        ref={initialRef}
+                      />
+                    </HStack>
+                  )}
+                  {tracker.isNotes && (
+                    <HStack>
+                      <Input
+                        placeholder="notes"
+                        onChange={(e) => setNotesValue(e.target.value)}
+                        width="100%"
+                        maxWidth="500px"
+                        height="50px"
+                        fontSize="24px"
+                        marginBottom="10px"
+                        type="text"
+                        ref={initialRef}
+                      />
+                    </HStack>
+                  )}
                 </VStack>
               </form>
             </Box>
           </ModalBody>
-
           <ModalFooter>
             <Button
               colorScheme="blue"
               onClick={() =>
                 AddEntry(
-                  tracker.id,
+                  tracker.trackerUID,
                   numberValue,
                   booleanValue,
                   timeValue,
@@ -115,7 +146,7 @@ export default function NewDataEntryModal({
                 )
               }
             >
-              Add new
+              Add new entry
             </Button>{" "}
           </ModalFooter>
         </ModalContent>
