@@ -8,7 +8,15 @@ import {
 } from "firebase/auth";
 
 import { auth, db, signInWithGoogle } from "./firebase";
-import { Box, Center, Input, Button, HStack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Center,
+  Input,
+  Button,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { setDoc, doc, docs, getDocs, collection } from "firebase/firestore";
 
 function LoginPage() {
@@ -170,95 +178,105 @@ function LoginPage() {
   };
 
   return (
-    <Box className="mainFont">
-      
-        <Box>
-        <VStack>
-          <Text fontSize='3xl'> Register </Text>
-          <Input
-          htmlSize={40} width='auto'
-            _hover={{ bgColor: "white" }}
-            marginTop="20px"
-            variant="filled"
-            placeholder="Username..."
-            onChange={(event) => {
-              setUsername(event.target.value);
-            }}
-          />
-          <Input
-            htmlSize={40} width='auto'
-            _hover={{ bgColor: "white" }}
-            marginTop="40px"
-            variant="filled"
-            placeholder="Email..."
-            onChange={(event) => {
-              setRegisterEmail(event.target.value);
-            }}
-          />
 
-          <Input
-            htmlSize={40} width='auto'
-            _hover={{ bgColor: "white" }}
-            marginTop="40px"
-            marginBottom="40px"
-            variant="filled"
-            placeholder="Password..."
-            type={"password"}
-            onChange={(event) => {
-              setRegisterPassword(event.target.value);
-            }}
-          />
-          <Button onClick={register}>Register</Button>
+    <Box className="mainFont">
+      <HStack justifyContent="space-evenly">
+        <Box>
+          <VStack>
+            <Text fontSize="3xl"> Register </Text>
+            <Input
+              htmlSize={40}
+              width="auto"
+              _hover={{ bgColor: "white" }}
+              marginTop="20px"
+              variant="filled"
+              placeholder="Username..."
+              onChange={(event) => {
+                setUsername(event.target.value);
+              }}
+            />
+            <Input
+              htmlSize={40}
+              width="auto"
+              _hover={{ bgColor: "white" }}
+              marginTop="40px"
+              variant="filled"
+              placeholder="Email..."
+              onChange={(event) => {
+                setRegisterEmail(event.target.value);
+              }}
+            />
+
+            <Input
+              htmlSize={40}
+              width="auto"
+              _hover={{ bgColor: "white" }}
+              marginTop="40px"
+              marginBottom="40px"
+              variant="filled"
+              placeholder="Password..."
+              type={"password"}
+              onChange={(event) => {
+                setRegisterPassword(event.target.value);
+              }}
+            />
+            <Button onClick={register}>Register</Button>
           </VStack>
         </Box>
-      
-      <HStack>
-        <Box>
-        <Text 
-        fontSize='3xl'> Login </Text>
-          <Input
-           htmlSize={40} width='auto'
-           _hover={{ bgColor: "white" }}
-           marginTop="20px"
-           variant="filled"
-            placeholder="Email..."
-            onChange={(event) => {
-              setLoginEmail(event.target.value);
-            }}
-          />
 
-          <Input
-            htmlSize={40} width='auto'
-            _hover={{ bgColor: "white" }}
-            marginTop="40px"
-            variant="filled"
-            placeholder="Password..."
-            type="password"
-            onChange={(event) => {
-              setLoginPassword(event.target.value);
-            }}
-          />
-          <Box>
-            <Button
-              onClick={google}
-              className="loginFont"
-              bgColor="white"
-              color="#2f0505"
-              borderRadius={"3px"}
-              minHeight="45px"
-            >
-              <Box fontSize="24px" paddingRight="10px" paddingTop="5px">
-                <ion-icon name="logo-google"></ion-icon>
-              </Box>
-              Sign in with Google
-            </Button>
-          </Box>
-          <Button onClick={login}>Login</Button>
+        <Box paddingTop="3px">
+          <VStack>
+            <Text fontSize="3xl"> Login </Text>
+            <Input
+              htmlSize={40}
+              width="auto"
+              _hover={{ bgColor: "white" }}
+              variant="filled"
+              placeholder="Email..."
+              onChange={(event) => {
+                setLoginEmail(event.target.value);
+              }}
+            />
+
+            <Input
+              htmlSize={40}
+              width="auto"
+              _hover={{ bgColor: "white" }}
+              marginTop="40px"
+              variant="filled"
+              placeholder="Password..."
+              type="password"
+              onChange={(event) => {
+                setLoginPassword(event.target.value);
+              }}
+            />
+            <Box>
+              <Button
+                onClick={google}
+                className="loginFont"
+                bgColor="white"
+                color="#2f0505"
+                borderRadius={"3px"}
+                minHeight="45px"
+              >
+                <Box fontSize="24px" paddingRight="20px"paddingTop="5px">
+                  <ion-icon name="logo-google"></ion-icon>
+                </Box>
+                Sign in with Google
+              </Button>
+            </Box>
+            <Button onClick={login}>Login</Button>
+          </VStack>
         </Box>
       </HStack>
-      Signed in as: {user?.displayName}
-      <Button onClick={logout}>Logout</Button>
-      {error !== "" && <Text color="red">{error} </Text>}
+      <Center>
+        <Box bg='white'>
+          Signed in as: 
+        </Box>
+        {user?.displayName}
+        <Button onClick={logout}>Logout</Button>
+        {error !== "" && <Text color="red">{error} </Text>}
+      </Center>
     </Box>
   );
 }
