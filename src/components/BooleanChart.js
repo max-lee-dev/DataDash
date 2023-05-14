@@ -4,7 +4,6 @@ import { where, query, collection, getDocs, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 
 export default function BooleanChart({ uid }) {
-  const dataEntriesCollectionRef = collection(db, "dataEntries");
   const [booleanArray, setBooleanArray] = useState([]);
   useEffect(() => {
     async function findBooleanValues() {
@@ -23,19 +22,20 @@ export default function BooleanChart({ uid }) {
     findBooleanValues();
   }, []);
   console.log(booleanArray);
+  const dataEntriesCollectionRef = collection(db, "dataEntries");
 
   return (
-    <Box bgColor="#e6e2c1">
-      <Box display="flex" minWidth="100%">
-        {booleanArray.map((value) => (
+    <Box display={"flex"}>
+      {booleanArray.map((value) => (
+        <Box display="flex">
           <Box
             marginLeft="10px"
             bg={value ? "green" : "red"}
-            minH="20px"
+            height="20px"
             width="20px"
           ></Box>
-        ))}
-      </Box>
+        </Box>
+      ))}
     </Box>
   );
 }

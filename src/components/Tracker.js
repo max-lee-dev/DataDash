@@ -19,6 +19,7 @@ import {
   where,
   collection,
 } from "firebase/firestore";
+import NumberChart from "./NumberChart";
 import BooleanChart from "./BooleanChart";
 
 export default function Tracker({ tracker }) {
@@ -52,6 +53,20 @@ export default function Tracker({ tracker }) {
     }
     countSubmissions();
   }, [tracker]);
+  let numDataValues = 0;
+  if (tracker.isBoolean) {
+    numDataValues++;
+  }
+  if (tracker.isNumber) {
+    numDataValues++;
+  }
+  if (tracker.isNotes) {
+    numDataValues++;
+  }
+  if (tracker.isDate) {
+    numDataValues++;
+  }
+  const sizing = 100 / numDataValues;
 
   return (
     <Box alignItems={"flex-start"} width="100%">
@@ -84,8 +99,32 @@ export default function Tracker({ tracker }) {
             </Box>
           </Box>
           <Text paddingLeft="10px">{tracker.trackerDescription}</Text>
+
           <Box>
-            <BooleanChart uid={tracker.trackerUID} />
+            <HStack>
+              {tracker.isNumber && (
+                <Box
+                  bgColor="#e6e2c1"
+                  display="flex"
+                  overflowWrap={"normal"}
+                  minHeight="100px"
+                  width={`${sizing}%`}
+                >
+                  <NumberChart uid={tracker.trackerUID} />
+                </Box>
+              )}
+              {tracker.isBoolean && (
+                <Box
+                  bgColor="#e6e2c1"
+                  display="flex"
+                  overflowWrap={"normal"}
+                  minHeight="100px"
+                  width={`${sizing - 1}%`}
+                >
+                  <BooleanChart uid={tracker.trackerUID} />
+                </Box>
+              )}
+            </HStack>
           </Box>
         </Box>
         <Box bgColor="#FAFAF5" borderRadius="12px" minH="200px" width="20%">
