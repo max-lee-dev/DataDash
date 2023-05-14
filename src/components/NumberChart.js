@@ -34,7 +34,7 @@ export default function NumberChart({ uid }) {
         const month = date.getMonth() + 1 + "/" + date.getDate();
         if (!map.has(month)) map.set(month, parseInt(doc.data().numberValue));
         else {
-          map.set(month, map.get(month) + parseInt(doc.data().numberValue));
+          map.set(month + 1, map.get(month) + parseInt(doc.data().numberValue));
         }
       });
       const tempArray = Array.from(map);
@@ -52,10 +52,12 @@ export default function NumberChart({ uid }) {
         datasets: [
           {
             label: "WPM",
+            color: "#6E77CF",
             data: numberArray.map((data) => data),
             backgroundColor: "white",
+            borderColor: "#6E77CF",
             scaleShowLabels: false,
-            pointBackgroundColor: "#FFCD29",
+            pointBackgroundColor: "#6E77CF",
             pointRadius: 5,
             pointHitRadius: 100,
           },

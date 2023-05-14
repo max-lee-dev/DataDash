@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Text, HStack, VStack, Button } from "@chakra-ui/react";
+import { Box, Text, HStack, VStack, Button, Tooltip } from "@chakra-ui/react";
 import { where, query, collection, getDocs, orderBy } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -15,7 +15,7 @@ export default function BooleanChart({ uid }) {
       const recentQuerySnapshot = await getDocs(top);
       const tempArray = [];
       recentQuerySnapshot.forEach((doc) => {
-        tempArray.push(doc.data().booleanValue);
+        tempArray.push(doc.data());
       });
       setBooleanArray(tempArray);
     }
@@ -27,13 +27,30 @@ export default function BooleanChart({ uid }) {
   return (
     <Box display={"flex"}>
       {booleanArray.map((value) => (
-        <Box display="flex">
-          <Box
-            marginLeft="10px"
-            bg={value ? "green" : "red"}
-            height="20px"
-            width="20px"
-          ></Box>
+        <Box marginLeft="10px">
+          <Tooltip
+            label={
+              value.date.toDate().getMonth() +
+              1 +
+              "/" +
+              value.date.toDate().getDate() +
+              " " +
+              value.booleanValue
+            }
+          >
+            <Box
+              bg={value.booleanValue ? "green" : "red"}
+              height="20px"
+              width="20px"
+            ></Box>
+          </Tooltip>
+
+          <Text fontSize="12px">
+            {value.date.toDate().getMonth() +
+              1 +
+              "/" +
+              value.date.toDate().getDate()}
+          </Text>
         </Box>
       ))}
     </Box>
