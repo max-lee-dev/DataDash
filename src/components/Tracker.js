@@ -45,7 +45,6 @@ export default function Tracker({ tracker }) {
   const [numEntries, setNumEntries] = useState(0);
   useEffect(() => {
     async function countSubmissions() {
-      console.log(tracker.trackerUID);
       let amount = 0;
       const q = query(
         dataEntriesCollectionRef,
@@ -53,6 +52,7 @@ export default function Tracker({ tracker }) {
       );
       const recentQuerySnapshot = await getDocs(q);
       const tempArray = [];
+      const tempTimeArray = [];
       recentQuerySnapshot.forEach((doc) => {
         amount++;
       });
@@ -88,7 +88,6 @@ export default function Tracker({ tracker }) {
     if (showDate && tracker.isTime) {
       active++;
     }
-    console.log(active);
     setActiveElements(active);
   }, [showBoolean, showNumber, showNotes, showDate]);
   const sizing = 100 / activeElements;

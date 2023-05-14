@@ -21,7 +21,6 @@ export default function BooleanChart({ uid }) {
     }
     findBooleanValues();
   }, []);
-  console.log(booleanArray);
   const dataEntriesCollectionRef = collection(db, "dataEntries");
 
   return (

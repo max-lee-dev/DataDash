@@ -46,7 +46,6 @@ const Dashboard = () => {
     onClose: onAddTrackerClose,
     onOpen: onAddTrackerOpen,
   } = useDisclosure();
-  console.log(myTrackers);
 
   return (
     <Box paddingTop="50px" minHeight="60vh" className="mainFont">

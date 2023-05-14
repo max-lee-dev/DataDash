@@ -42,7 +42,6 @@ export default function NewTrackerModal({
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  console.log(trackerName, isNumber, isBoolean, isTime, isNotes);
   useEffect(() => {
     setTrackerName("");
     setIsNumber(false);
@@ -64,9 +63,12 @@ export default function NewTrackerModal({
           <ModalHeader>
             <Box className="mainFont">
               <Input
-              maxW='sm' borderWidth='1px' borderRadius='lg' borderColor = "grey"
-              marginTop = "20px"
-              marginBottom = "10px"
+                maxW="sm"
+                borderWidth="1px"
+                borderRadius="lg"
+                borderColor="grey"
+                marginTop="20px"
+                marginBottom="10px"
                 fontSize="24px"
                 placeholder="Tracker Name..."
                 _hover={{ bgColor: "white" }}
@@ -77,9 +79,11 @@ export default function NewTrackerModal({
               />
               <Box paddingBottom="1px">
                 <Input
-                maxW='sm' borderWidth='1px' borderRadius='lg'
-                _hover={{ bgColor: "white" }}
-                variant="filled"
+                  maxW="sm"
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  _hover={{ bgColor: "white" }}
+                  variant="filled"
                   type="text"
                   fontSize="14px"
                   height="28px"

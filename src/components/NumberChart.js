@@ -34,7 +34,7 @@ export default function NumberChart({ uid }) {
         const month = date.getMonth() + 1 + "/" + date.getDate();
         if (!map.has(month)) map.set(month, parseInt(doc.data().numberValue));
         else {
-          map.set(month + 1, map.get(month) + parseInt(doc.data().numberValue));
+          map.set(month, map.get(month) + parseInt(doc.data().numberValue));
         }
       });
       const tempArray = Array.from(map);
@@ -43,7 +43,6 @@ export default function NumberChart({ uid }) {
     }
     findBooleanValues();
   }, []);
-  console.log("yo: " + numberArray);
 
   useEffect(() => {
     try {
@@ -51,7 +50,6 @@ export default function NumberChart({ uid }) {
         labels: datesArray.map((data) => data),
         datasets: [
           {
-            label: "WPM",
             color: "#6E77CF",
             data: numberArray.map((data) => data),
             backgroundColor: "white",
@@ -68,7 +66,6 @@ export default function NumberChart({ uid }) {
       console.log(error.message);
     }
   }, [numberArray]);
-  console.log(graphData);
   const dataEntriesCollectionRef = collection(db, "dataEntries");
 
   if (!loading)

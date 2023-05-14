@@ -46,7 +46,6 @@ export default function NewDataEntryModal({
     if (!tracker.isTime) setTimeValue(null);
     if (!tracker.isNotes) setNotesValue(null);
   }, []);
-  console.log(tracker.uid);
 
   return (
     <>
