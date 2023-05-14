@@ -19,6 +19,7 @@ import {
   where,
   collection,
 } from "firebase/firestore";
+import BooleanChart from "./BooleanChart";
 
 export default function Tracker({ tracker }) {
   const {
@@ -83,6 +84,9 @@ export default function Tracker({ tracker }) {
             </Box>
           </Box>
           <Text paddingLeft="10px">{tracker.trackerDescription}</Text>
+          <Box>
+            <BooleanChart uid={tracker.trackerUID} />
+          </Box>
         </Box>
         <Box bgColor="#FAFAF5" borderRadius="12px" minH="200px" width="20%">
           <Text paddingLeft="10px" fontSize="22px">

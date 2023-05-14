@@ -29,6 +29,7 @@ export default function AddEntry(
         timeValue: timeValue,
         notesValue: notesValue,
         parentTracker: trackerUID,
+        when: Date.parse(new Date()),
       }).then(() => {
         window.location.reload();
       });
