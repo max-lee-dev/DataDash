@@ -17,6 +17,7 @@ export default function Statistics({ tracker, numEntries }) {
   const [highest, setHighest] = useState(0);
   const [lowest, setLowest] = useState(0);
   const [timeValues, setTimeValues] = useState([]);
+  const [booleanArray, setBooleanArray] = useState([]);
 
   useEffect(() => {
     async function findBooleanValues() {
@@ -31,17 +32,22 @@ export default function Statistics({ tracker, numEntries }) {
       let highest = Number.MIN_VALUE;
       let lowest = Number.MAX_VALUE;
       const tempTimeArray = [];
+      const tempBooleanArray = [];
       recentQuerySnapshot.forEach((doc) => {
         tempArray.push(doc.data());
         if (tracker.isTime) {
           tempTimeArray.push(doc.data().timeValue.replace(" ", ""));
           console.log("time arr: " + tempTimeArray);
         }
+        if (tracker.isBoolean) {
+          tempBooleanArray.push(doc.data().booleanValue);
+        }
 
         highest = Math.max(highest, parseInt(doc.data().numberValue));
         lowest = Math.min(lowest, parseInt(doc.data().numberValue));
         sum += parseInt(doc.data().numberValue);
       });
+      setBooleanArray(tempBooleanArray);
       setAverage(sum / tempArray.length);
       setHighest(highest);
       setLowest(lowest);
@@ -89,11 +95,9 @@ export default function Statistics({ tracker, numEntries }) {
             </Box>
 
             <Text paddingLeft="10px" fontSize="16px">
-              Longest streak:
+              Longest streak: {longestStreak(booleanArray)}
             </Text>
-            <Text paddingLeft="10px" fontSize="16px">
-              Current streak:
-            </Text>
+            <Text paddingLeft="10px" fontSize="16px"></Text>
           </Box>
         )}
         {tracker.isTime && (
@@ -122,6 +126,21 @@ export default function Statistics({ tracker, numEntries }) {
       </Text>
     </Box>
   );
+
+  function longestStreak(array) {
+    let longest = 0;
+    let current = 0;
+    for (let i = 0; i < array?.length; i++) {
+      if (array[i]) {
+        current++;
+      } else {
+        longest = Math.max(longest, current);
+        current = 0;
+      }
+      longest = Math.max(longest, current);
+    }
+    return longest;
+  }
 
   function calculateAverageTime(timeArray) {
     // Convert each time string to a number of minutes
