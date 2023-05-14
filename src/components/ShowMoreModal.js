@@ -20,6 +20,7 @@ import NumberChart from "./NumberChart";
 import BooleanChart from "./BooleanChart";
 import { auth } from "./firebase";
 import { useState, useEffect } from "react";
+import NotesDisplay from "./NotesDisplay";
 
 export default function ShowMoreModal({
   isShowMoreOpen,
@@ -163,7 +164,7 @@ export default function ShowMoreModal({
                       </HStack>
                     </Button>
                     <Box display="flex" overflowWrap={"normal"}>
-                      {showNotes && <BooleanChart uid={tracker.trackerUID} />}
+                      {showNotes && <NotesDisplay uid={tracker.trackerUID} />}
                     </Box>
                   </Box>
                 )}

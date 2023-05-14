@@ -55,7 +55,44 @@ const Dashboard = () => {
           <Text>Loading...</Text>
         </Center>
       )}
-      {!loading && (
+      {!loading && !user && (
+        <Box>
+          <Center>
+            <Box width="80%">
+              <VStack alignItems="flex-start" spacing="-8">
+                <Text
+                  paddingBottom="20px"
+                  fontWeight="700"
+                  color="#424DB6"
+                  fontSize="60px"
+                >
+                  DataDash
+                </Text>
+                <Text paddingBottom="20px" fontSize="24px">
+                  Track and analyze your daily data
+                </Text>
+              </VStack>
+            </Box>
+          </Center>
+          <Center>
+            <Box>
+              <Button
+                as="a"
+                fontSize="60px"
+                color="white"
+                bgColor="#424DB6"
+                width="400px"
+                height="100px"
+                marginTop="50px"
+              >
+                <a href="/login"> Get Started</a>
+              </Button>
+            </Box>
+          </Center>
+        </Box>
+      )}
+
+      {!loading && user && (
         <Center>
           <Box width="80%">
             <Text paddingBottom="20px" fontWeight="600" fontSize="24px">
@@ -76,6 +113,7 @@ const Dashboard = () => {
                 user={user}
               />
             </Box>
+            <Box></Box>
             <Text>
               {myTrackers.length > 0 && (
                 <Box>

@@ -81,6 +81,9 @@ export default function Statistics({ tracker, numEntries }) {
                 <Divider borderWidth={"2px"} />
               </HStack>
             </Box>
+            <Text paddingLeft="10px" fontSize="16px">
+              Average: {numEntries === 0 ? "N/A" : average.toFixed(2)}
+            </Text>
 
             <Text paddingLeft="10px" fontSize="16px">
               Highest: {numEntries === 0 ? "N/A" : highest}

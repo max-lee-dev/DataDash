@@ -59,7 +59,7 @@ export default function Tracker({ tracker }) {
         dataEntriesCollectionRef,
         where("parentTracker", "==", tracker.trackerUID)
       );
-      const top = query(q, orderBy("when", "asc"));
+      const top = query(q, orderBy("when", "desc"));
       const recentQuerySnapshot = await getDocs(top);
       const tempArray = [];
       const tempTimeArray = [];
