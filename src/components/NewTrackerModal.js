@@ -64,6 +64,7 @@ export default function NewTrackerModal({
           <ModalHeader>
             <Box className="mainFont">
               <Input
+              maxW='sm' borderWidth='1px' borderRadius='lg' borderColor = "grey"
               marginTop = "20px"
               marginBottom = "10px"
                 fontSize="24px"
@@ -76,6 +77,7 @@ export default function NewTrackerModal({
               />
               <Box paddingBottom="1px">
                 <Input
+                maxW='sm' borderWidth='1px' borderRadius='lg'
                 _hover={{ bgColor: "white" }}
                 variant="filled"
                   type="text"
