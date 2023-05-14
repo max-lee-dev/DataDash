@@ -41,7 +41,7 @@ export default function Tracker({ tracker }) {
   const [showNumber, setShowNumber] = useState(true);
   const [showNotes, setShowNotes] = useState(true);
   const [showDate, setShowTime] = useState(true);
-
+  const [activeElements, setActiveElements] = useState(1);
   const [numEntries, setNumEntries] = useState(0);
   useEffect(() => {
     async function countSubmissions() {
@@ -73,7 +73,25 @@ export default function Tracker({ tracker }) {
   if (tracker.isTime) {
     numDataValues++;
   }
-  const sizing = 100 / numDataValues;
+
+  useEffect(() => {
+    let active = 0;
+    if (showBoolean && tracker.isBoolean) {
+      active++;
+    }
+    if (showNumber && tracker.isNumber) {
+      active++;
+    }
+    if (showNotes && tracker.isNotes) {
+      active++;
+    }
+    if (showDate && tracker.isTime) {
+      active++;
+    }
+    console.log(active);
+    setActiveElements(active);
+  }, [showBoolean, showNumber, showNotes, showDate]);
+  const sizing = 100 / activeElements;
 
   return (
     <Box alignItems={"flex-start"} width="100%">
@@ -107,33 +125,56 @@ export default function Tracker({ tracker }) {
           </Box>
           <Text paddingLeft="10px">{tracker.trackerDescription}</Text>
 
-          <Box bg="#f6f7f2">
+          <Box>
             <HStack alignItems={"flex-start"}>
               {tracker.isNumber && (
-                <Box width={`${sizing}%`}>
-                  <Button onClick={() => setShowNumber(!showNumber)}>
-                    {showNumber ? "hide" : "show"}
-                  </Button>
-                  <Box
-                    alignSelf={"center"}
-                    display="flex"
-                    overflowWrap={"normal"}
-                    width={`${sizing}%`}
+                <Box width={showNumber ? `${sizing}%` : ""}>
+                  <Button
+                    height="25px"
+                    width="25px"
+                    bg="transparent"
+                    _hover={{ bg: "transparent" }}
+                    onClick={() => setShowNumber(!showNumber)}
                   >
-                    {showNumber && <NumberChart uid={tracker.trackerUID} />}
-                  </Box>
+                    <Box fontSize="25px">
+                      {showNumber ? (
+                        <Box>
+                          <ion-icon name="eye-sharp"></ion-icon>
+                        </Box>
+                      ) : (
+                        <ion-icon name="eye-off-sharp"></ion-icon>
+                      )}
+                    </Box>
+                  </Button>
+
+                  {showNumber && (
+                    <Box
+                      alignSelf={"center"}
+                      display="flex"
+                      overflowWrap={"normal"}
+                      width={`${sizing}%`}
+                    >
+                      <NumberChart uid={tracker.trackerUID} />
+                    </Box>
+                  )}
                 </Box>
               )}
               {tracker.isBoolean && (
-                <Box>
-                  <Button onClick={() => setShowBoolean(!showBoolean)}>
-                    {showBoolean ? "hide" : "show"}
-                  </Button>
-                  <Box
-                    display="flex"
-                    overflowWrap={"normal"}
-                    width={`${sizing}%`}
+                <Box width={showBoolean ? `${sizing}%` : ""}>
+                  <Button
+                    bg="transparent"
+                    _hover={{ bg: "transparent" }}
+                    onClick={() => setShowBoolean(!showBoolean)}
                   >
+                    <Box fontSize="25px">
+                      {showBoolean ? (
+                        <ion-icon name="eye-sharp"></ion-icon>
+                      ) : (
+                        <ion-icon name="eye-off-sharp"></ion-icon>
+                      )}
+                    </Box>
+                  </Button>
+                  <Box display="flex" overflowWrap={"normal"}>
                     {showBoolean && <BooleanChart uid={tracker.trackerUID} />}
                   </Box>
                 </Box>
