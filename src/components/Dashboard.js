@@ -57,31 +57,33 @@ const Dashboard = () => {
         </Center>
       )}
       {!loading && (
-        <Box>
-          <Text paddingBottom="20px" fontSize="24px">
-            Welcome, {user?.displayName}{" "}
-          </Text>
+        <Center>
+          <Box width="80%">
+            <Text paddingBottom="20px" fontSize="24px">
+              Welcome, {user?.displayName}{" "}
+            </Text>
 
-          <Box className="floating">
-            <AddTrackerButton
-              isAddTrackerOpen={isAddTrackerOpen}
-              onAddTrackerOpen={onAddTrackerOpen}
-              onAddTrackerClose={onAddTrackerClose}
-              user={user}
-            />
+            <Box className="floating">
+              <AddTrackerButton
+                isAddTrackerOpen={isAddTrackerOpen}
+                onAddTrackerOpen={onAddTrackerOpen}
+                onAddTrackerClose={onAddTrackerClose}
+                user={user}
+              />
+            </Box>
+            <Text>
+              {myTrackers.length > 0 && (
+                <Box>
+                  <VStack>
+                    {myTrackers.map((tracker) => (
+                      <Tracker key={tracker.trackerName} tracker={tracker} />
+                    ))}
+                  </VStack>
+                </Box>
+              )}
+            </Text>
           </Box>
-          <Text>
-            {myTrackers.length > 0 && (
-              <Box>
-                <VStack>
-                  {myTrackers.map((tracker) => (
-                    <Tracker key={tracker.trackerName} tracker={tracker} />
-                  ))}
-                </VStack>
-              </Box>
-            )}
-          </Text>
-        </Box>
+        </Center>
       )}
     </Box>
   );
