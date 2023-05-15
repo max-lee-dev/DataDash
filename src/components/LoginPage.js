@@ -102,16 +102,21 @@ function LoginPage() {
   }
 
   function createNewGoogleUser(uid, name, email) {
-    setDoc(doc(db, "users", uid), {
-      displayName: name,
-      email: email,
-      account_created: new Date().toUTCString(),
-      uid: uid,
+    async function wait() {
+      setDoc(doc(db, "users", uid), {
+        displayName: name,
+        email: email,
+        account_created: new Date().toUTCString(),
+        uid: uid,
+      });
+      if (auth)
+        updateProfile(auth.currentUser, { displayName: name }).catch((err) =>
+          console.log(err)
+        );
+    }
+    wait().then(() => {
+      window.location.replace(`/`);
     });
-    if (auth)
-      updateProfile(auth.currentUser, { displayName: name }).catch((err) =>
-        console.log(err)
-      );
   }
 
   function google() {
@@ -178,12 +183,14 @@ function LoginPage() {
   };
 
   return (
-
     <Box className="mainFont">
       <HStack justifyContent="space-evenly">
         <Box>
           <VStack>
-            <Text fontSize="3xl"> Register </Text>
+            <Text fontSize="3xl" fontWeight={600}>
+              {" "}
+              Register{" "}
+            </Text>
             <Input
               htmlSize={40}
               width="auto"
@@ -226,7 +233,10 @@ function LoginPage() {
 
         <Box paddingTop="3px">
           <VStack>
-            <Text fontSize="3xl"> Login </Text>
+            <Text fontWeight={600} fontSize="3xl">
+              {" "}
+              Login{" "}
+            </Text>
             <Input
               htmlSize={40}
               width="auto"
@@ -257,9 +267,10 @@ function LoginPage() {
                 bgColor="white"
                 color="#2f0505"
                 borderRadius={"3px"}
+                width="210px"
                 minHeight="45px"
               >
-                <Box fontSize="24px" paddingRight="20px"paddingTop="5px">
+                <Box fontSize="24px" paddingRight="5px" paddingTop="5px">
                   <ion-icon name="logo-google"></ion-icon>
                 </Box>
                 Sign in with Google
@@ -270,11 +281,11 @@ function LoginPage() {
         </Box>
       </HStack>
       <Center>
-        <Box bg='white'>
-          Signed in as: 
-        </Box>
-        {user?.displayName}
-        <Button onClick={logout}>Logout</Button>
+        {auth.currentUser ? (
+          <Button onClick={logout}>Logout</Button>
+        ) : (
+          <Box></Box>
+        )}
         {error !== "" && <Text color="red">{error} </Text>}
       </Center>
     </Box>

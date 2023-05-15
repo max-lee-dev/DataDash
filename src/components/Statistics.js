@@ -57,7 +57,14 @@ export default function Statistics({ tracker, numEntries }) {
     findBooleanValues();
   }, []);
   return (
-    <Box bgColor="#FAFAF5" borderRadius="12px" minH="200px" width="20%">
+    <Box
+      bgColor="#FAFAF5"
+      borderRadius="12px"
+      minH="200px"
+      width="20%"
+      paddingBottom="10px"
+      paddingTop="5px"
+    >
       <Text paddingLeft="10px" fontSize="22px">
         Statistics
         <Text fontSize="16px">{numEntries} entries</Text>
@@ -76,10 +83,10 @@ export default function Statistics({ tracker, numEntries }) {
             </Box>
 
             <Text paddingLeft="10px" fontSize="16px">
-              Highest: {highest}
+              Highest: {numEntries === 0 ? "N/A" : highest}
             </Text>
             <Text paddingLeft="10px" fontSize="16px">
-              Lowest: {lowest}
+              Lowest: {numEntries === 0 ? "N/A" : lowest}
             </Text>
           </Box>
         )}
@@ -112,14 +119,16 @@ export default function Statistics({ tracker, numEntries }) {
             </Box>
 
             <Text paddingLeft="10px" fontSize="16px">
-              Average time: {calculateAverageTime(timeValues)}
+              Average time:{" "}
+              {numEntries === 0 ? "N/A" : calculateAverageTime(timeValues)}
             </Text>
             <Text paddingLeft="10px" fontSize="16px">
-              Earliest time: {findEarliest(timeValues)}
+              Earliest time:{" "}
+              {numEntries === 0 ? "N/A" : findEarliest(timeValues)}
             </Text>
             <Text paddingLeft="10px" fontSize="16px">
               {" "}
-              Latest time: {findLatest(timeValues)}
+              Latest time: {numEntries === 0 ? "N/A" : findLatest(timeValues)}
             </Text>
           </Box>
         )}
@@ -146,6 +155,7 @@ export default function Statistics({ tracker, numEntries }) {
     // Convert each time string to a number of minutes
     let earliest = 1000000;
     let latest = 0;
+
     const minuteArray = timeArray.map((time) => {
       // Parse the hours, minutes, and AM/PM from the time string
       const [hour, minute, period] = time.split(/:|(?<=\d)(?=[AP]M)/);
@@ -174,17 +184,10 @@ export default function Statistics({ tracker, numEntries }) {
     // Convert the average minute value back to a string in "hh:mmAM/PM" format
     const hour12 = Math.floor(averageMinute / 60) % 12 || 12;
     const minute12 = averageMinute % 60;
-    const period = averageMinute < 720 ? "AM" : "PM";
+    const period = averageMinute >= 720 ? "AM" : "PM";
     const averageTime = `${hour12.toString().padStart(2, "0")}:${minute12
       .toString()
       .padStart(2, "0")} ${period}`;
-
-    const eh = Math.floor(earliest / 60) % 12 || 12;
-    const em = earliest % 60;
-    const ep = earliest < 720 ? "AM" : "PM";
-    const et = `${eh.toString().padStart(2, "0")}:${em
-      .toString()
-      .padStart(2, "0")} ${ep}`;
 
     // Return the average time in "hh:mmAM/PM" format
     if (averageTime.charAt(0) === "0") {
@@ -209,7 +212,6 @@ export default function Statistics({ tracker, numEntries }) {
         earliestTime = currentTime;
       }
     }
-    console.log("earliest: " + earliestTime);
     return earliestTime;
   }
   function findLatest(times) {

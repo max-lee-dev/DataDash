@@ -57,7 +57,7 @@ const Dashboard = () => {
       {!loading && (
         <Center>
           <Box width="80%">
-            <Text paddingBottom="20px" fontSize="24px">
+            <Text paddingBottom="20px" fontWeight="600" fontSize="24px">
               Welcome, {user?.displayName}
               {user ? "" : "Guest"}
             </Text>
