@@ -72,7 +72,7 @@ export default function ShowMoreModal({
                           ) : (
                             <ion-icon name="eye-off-sharp"></ion-icon>
                           )}
-                          <Text fontSize="20px" paddingBottom="5px">
+                          <Text fontSize="20px" paddingBottom="7px">
                             Value
                           </Text>
                         </HStack>
@@ -98,16 +98,71 @@ export default function ShowMoreModal({
                       _hover={{ bg: "transparent" }}
                       onClick={() => setShowBoolean(!showBoolean)}
                     >
-                      <Box fontSize="25px">
-                        {showBoolean ? (
-                          <ion-icon name="eye-sharp"></ion-icon>
-                        ) : (
-                          <ion-icon name="eye-off-sharp"></ion-icon>
-                        )}
-                      </Box>
+                      <HStack spacing={2}>
+                        <Box fontSize="25px">
+                          {showBoolean ? (
+                            <ion-icon name="eye-sharp"></ion-icon>
+                          ) : (
+                            <ion-icon name="eye-off-sharp"></ion-icon>
+                          )}
+                        </Box>
+                        <Text fontSize="20px" paddingBottom="5px">
+                          True/False
+                        </Text>
+                      </HStack>
                     </Button>
                     <Box display="flex" overflowWrap={"normal"}>
                       {showBoolean && <BooleanChart uid={tracker.trackerUID} />}
+                    </Box>
+                  </Box>
+                )}
+                {tracker.isTime && (
+                  <Box width={showDate ? `${sizing}%` : ""}>
+                    <Button
+                      bg="transparent"
+                      _hover={{ bg: "transparent" }}
+                      onClick={() => setShowTime(!showDate)}
+                    >
+                      <HStack spacing={2}>
+                        <Box fontSize="25px">
+                          {showDate ? (
+                            <ion-icon name="eye-sharp"></ion-icon>
+                          ) : (
+                            <ion-icon name="eye-off-sharp"></ion-icon>
+                          )}
+                        </Box>
+                        <Text fontSize="20px" paddingBottom="5px">
+                          Time
+                        </Text>
+                      </HStack>
+                    </Button>
+                    <Box display="flex" overflowWrap={"normal"}>
+                      {showDate && <BooleanChart uid={tracker.trackerUID} />}
+                    </Box>
+                  </Box>
+                )}
+                {tracker.isNotes && (
+                  <Box width={showNotes ? `${sizing}%` : ""}>
+                    <Button
+                      bg="transparent"
+                      _hover={{ bg: "transparent" }}
+                      onClick={() => setShowNotes(!showNotes)}
+                    >
+                      <HStack spacing={2}>
+                        <Box fontSize="25px">
+                          {showNotes ? (
+                            <ion-icon name="eye-sharp"></ion-icon>
+                          ) : (
+                            <ion-icon name="eye-off-sharp"></ion-icon>
+                          )}
+                        </Box>
+                        <Text fontSize="20px" paddingBottom="5px">
+                          Notes
+                        </Text>
+                      </HStack>
+                    </Button>
+                    <Box display="flex" overflowWrap={"normal"}>
+                      {showNotes && <BooleanChart uid={tracker.trackerUID} />}
                     </Box>
                   </Box>
                 )}
