@@ -3,7 +3,7 @@ import AddTrackerButton from "./AddTrackerButton";
 import NewTrackerModal from "./NewTrackerModal";
 import Tracker from "./Tracker";
 import { db } from "./firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
 import {
   Center,
@@ -35,7 +35,8 @@ const Dashboard = () => {
     });
     async function getTrackers() {
       const q = query(trackersCollectionRef, where("userUID", "==", user?.uid));
-      const trackersSnapshot = await getDocs(q);
+      const order = query(q, orderBy("when", "desc"));
+      const trackersSnapshot = await getDocs(order);
       const trackersList = trackersSnapshot.docs.map((doc) => doc.data());
       setMyTrackers(trackersList);
     }

@@ -163,7 +163,6 @@ export default function Statistics({ tracker, numEntries }) {
       // Convert the hours and minutes to numbers
       const hourNumber = parseInt(hour);
       const minuteNumber = parseInt(minute);
-      console.log("time: " + minuteNumber);
       // Convert the hours to a 24-hour clock if necessary
       const hour24 = period === "PM" ? hourNumber + 12 : hourNumber;
 
@@ -184,7 +183,7 @@ export default function Statistics({ tracker, numEntries }) {
     // Convert the average minute value back to a string in "hh:mmAM/PM" format
     const hour12 = Math.floor(averageMinute / 60) % 12 || 12;
     const minute12 = averageMinute % 60;
-    const period = averageMinute >= 720 ? "AM" : "PM";
+    const period = averageMinute < 720 ? "AM" : "PM";
     const averageTime = `${hour12.toString().padStart(2, "0")}:${minute12
       .toString()
       .padStart(2, "0")} ${period}`;

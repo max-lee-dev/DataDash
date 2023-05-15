@@ -34,6 +34,7 @@ export default function AddTracker(
         isTime: isTime,
         isNotes: isNotes,
         userUID: userUID,
+        when: Date.parse(new Date()),
       });
 
       await updateDoc(doc(db, "trackers", newTracker.id), {

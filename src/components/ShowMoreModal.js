@@ -15,6 +15,7 @@ import {
   HStack,
   Checkbox,
 } from "@chakra-ui/react";
+import TimeChart from "./TimeChart";
 import NumberChart from "./NumberChart";
 import BooleanChart from "./BooleanChart";
 import { auth } from "./firebase";
@@ -137,7 +138,7 @@ export default function ShowMoreModal({
                       </HStack>
                     </Button>
                     <Box display="flex" overflowWrap={"normal"}>
-                      {showDate && <BooleanChart uid={tracker.trackerUID} />}
+                      {showDate && <TimeChart uid={tracker.trackerUID} />}
                     </Box>
                   </Box>
                 )}
